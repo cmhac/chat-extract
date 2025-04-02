@@ -1,0 +1,10 @@
+*.mov
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+.env
+*.png

@@ -1,0 +1,31 @@
+[project]
+name = "groupchat-text-extraction"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "Chris Hacker", email = "49451910+cmhac@users.noreply.github.com" },
+]
+readme = "README.md"
+requires-python = "^3.12"
+dependencies = [
+    "opencv-python (>=4.11.0.86,<5.0.0.0)",
+    "click (>=8.1.8,<9.0.0)",
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "openai (>=1.70.0,<2.0.0)",
+    "orjson (>=3.10.16,<4.0.0)",
+    "aiofiles (>=24.1.0,<25.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
+    "tenacity (>=9.1.2,<10.0.0)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+groupchat-text-extraction = "groupchat_text_extraction.cli:cli"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.6"
+jupyter = "^1.1.1"
+black = "^25.1.0"
