@@ -8,3 +8,4 @@ __pycache__/
 *.log
 .env
 *.png
+.chat_extract
