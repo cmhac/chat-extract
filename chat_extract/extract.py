@@ -138,13 +138,10 @@ class ChatTextExtractor:
         # create a directory to store the frames in
         frames_path.mkdir(parents=True, exist_ok=True)
         # warn the user and remove all existing files in the directory for re-extraction
-        if frames_path.exists():
-            existing_files = list(frames_path.iterdir())
-            if existing_files:
-                for file in existing_files:
-                    file.unlink()
-        else:
-            frames_path.mkdir(parents=True, exist_ok=True)
+        existing_files = list(frames_path.iterdir())
+        if existing_files:
+            for file in existing_files:
+                file.unlink()
 
         # extract frames from the video
         extracted_frames = extract_frames(video_path, n, frames_path)

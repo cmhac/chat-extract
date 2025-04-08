@@ -9,4 +9,6 @@ __pycache__/
 .env
 *.png
 .chat_extract
-*coverage*
+.coverage
+htmlcov
+coverage.xml

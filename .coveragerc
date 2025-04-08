@@ -1,0 +1,6 @@
+[run]
+omit = 
+    config.py
+    config-3.py
+    tests/*
+    .vscode/*
