@@ -19,6 +19,7 @@ dependencies = [
     "polars (>=1.26.0,<2.0.0)",
     "pydantic (>=2.11.2,<3.0.0)",
     "instructor (>=1.7.9,<2.0.0)",
+    "rust-just (>=1.40.0,<2.0.0)",
 ]
 
 [build-system]
@@ -32,3 +33,7 @@ chat-extract = "chat_extract.cli:cli"
 pylint = "^3.3.6"
 jupyter = "^1.1.1"
 black = "^25.1.0"
+pytest = "^8.3.5"
+pytest-mock = "^3.14.0"
+pytest-asyncio = "^0.26.0"
+pytest-coverage = "^0.0"
