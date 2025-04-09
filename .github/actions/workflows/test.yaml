@@ -1,0 +1,25 @@
+name: Code checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Python and Poetry
+        uses: ./.github/actions/setup
+
+      - name: Run tests
+        run: just test
+
+      - name: Exit if the workflow changed any files
+        run: |
+          git diff --exit-code || (echo "Files were changed by one of the code checks. Run the pre-commit hooks locally and push the changes." && exit 1)

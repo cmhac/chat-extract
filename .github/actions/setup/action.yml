@@ -1,0 +1,22 @@
+# .github/composite/setup.yaml
+name: "Setup Python and Poetry"
+description: "Sets up Python environment, and installs Poetry"
+inputs:
+  python-version:
+    description: "The version of Python to set up"
+    required: true
+    default: "3.12"
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "${{ inputs.python-version }}"
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+
+    - name: Install dependencies
+      shell: bash
+      run: poetry install
