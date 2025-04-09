@@ -31,4 +31,4 @@ jobs:
           token: ${{ secrets.GH_PAT }}
 
       - name: Check for version changes and create a tag
-        run: just tag
+        run: poetry run just tag

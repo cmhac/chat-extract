@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run tests
-        run: just test
+        run: poetry run just test
 
       - name: Exit if the workflow changed any files
         run: |
