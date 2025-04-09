@@ -12,40 +12,7 @@ from chat_extract.extract import (
     to_polars,
     cleanup_df,
 )
-
-
-# Dummy classes to simulate Message and MessageList objects
-class DummyMessage:
-    """A dummy message class to simulate the behavior of a message object."""
-
-    def __init__(self, sender, message, timestamp):
-        self.sender = sender
-        self.message = message
-        self.timestamp = timestamp
-
-    def model_dump(self):
-        """Simulate the model_dump method of a message object."""
-        return {
-            "sender": self.sender,
-            "message": self.message,
-            "timestamp": self.timestamp,
-        }
-
-
-class DummyMessageList:
-    """A dummy message list class to simulate the behavior of a message list object."""
-
-    def __init__(self, messages):
-        """Initialize with a list of dummy messages."""
-        self.messages = messages
-
-    def __eq__(self, other):
-        if not isinstance(other, DummyMessageList):
-            return False
-        return [m.model_dump() for m in self.messages] == [
-            m.model_dump() for m in other.messages
-        ]
-
+from chat_extract.models import Message, MessageList
 
 # --------------------- Test main function ---------------------
 
@@ -68,8 +35,10 @@ async def test_extract_data_from_video(tmp_path, monkeypatch):
     output_csv = tmp_path / "output.csv"
 
     # Create dummy message objects.
-    dummy_message = DummyMessage("Alice", "Hello", "2022-01-01 12:00:00")
-    dummy_message_list = DummyMessageList([dummy_message])
+    dummy_message = Message(
+        sender="Alice", message="Hello", timestamp="2022-01-01 12:00:00"
+    )
+    dummy_message_list = MessageList(messages=[dummy_message])
 
     # Patch ChatTextExtractor.extract_from_video to bypass actual video processing
     # and simply return our dummy message list.
@@ -133,8 +102,10 @@ async def test_extract_from_frame(tmp_path, monkeypatch, mocker):
     )
 
     # Create a dummy message list that will be returned by the API call.
-    dummy_message = DummyMessage("Alice", "Hello", "2022-01-01 12:34:56")
-    dummy_message_list = DummyMessageList([dummy_message])
+    dummy_message = Message(
+        sender="Alice", message="Hello", timestamp="2022-01-01 12:34:56"
+    )
+    dummy_message_list = MessageList(messages=[dummy_message])
 
     async def fake_create(*args, **kwargs):  # pylint: disable=unused-argument
         return dummy_message_list
@@ -347,8 +318,10 @@ async def test_extract_from_video_frames_dir_exists_with_files(
 # --------------------- Test to_polars ---------------------
 def test_to_polars():
     """Test the to_polars function."""
-    dummy_message = DummyMessage("Bob", "Hi there", "2022-02-02 14:00:00")
-    dummy_message_list = DummyMessageList([dummy_message])
+    dummy_message = Message(
+        sender="Bob", message="Hi there", timestamp="2022-02-02 14:00:00"
+    )
+    dummy_message_list = MessageList(messages=[dummy_message])
     df = to_polars([dummy_message_list])
     # Check that the DataFrame contains the expected columns.
     assert set(df.columns) >= {"sender", "message", "timestamp"}

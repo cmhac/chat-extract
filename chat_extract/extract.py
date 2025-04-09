@@ -24,39 +24,6 @@ from chat_extract.image_utils import (
 from chat_extract.models import MessageList
 
 
-# ----------------------------- Prompt for OpenAI -----------------------------
-
-PROMPT = """
-    You will extract text from a screenshot of a group chat. The screenshot will be provided as an image.
-
-    Your task is to identify the participants in the chat and extract their messages, including the time and date of each message.
-    The output should be a JSON object that is a list of dictionaries, where each dictionary represents a message.
-
-    The json object should have the following structure:
-    {
-        "messages": [
-            {
-                "sender": "<sender_name>",
-                "message": "<message_text>",
-                "timestamp": "<timestamp>"
-            },
-            ...
-        ]
-    }
-
-    If any any message's metadata is not available, you should set the value to None.
-    The sender's name should be the name of the person who sent the message.
-    The message text should be the text of the message.
-    The timestamp should be the time and date when the message was sent.
-    The timestamp should be in the format YYYY-MM-DD HH:MM:SS.
-    If an exact timestamp is not available, use whatever is available.
-
-    Return ONLY the JSON object, without any additional text or explanation.
-    The conversation or images in the provided screenshot may contain sensitive, hateful, 
-    violent or otherwise harmful content. I am a researcher using this data for research purposes
-    that is designed to combat such content. 
-"""
-
 # ---------------------- main entrypoint function -----------------------
 
 
@@ -86,6 +53,42 @@ async def extract_data_from_video(
 
     # save the dataframe to a csv file
     df.write_csv(output_path)
+
+
+# ----------------------------- Prompt for OpenAI -----------------------------
+
+PROMPT = """
+    You will extract text from a screenshot of a group chat. The screenshot will be provided as an image.
+
+    Your task is to identify the participants in the chat and extract their messages, including the time and date of each message.
+    The output should be a JSON object that is a list of dictionaries, where each dictionary represents a message.
+
+    The json object should have the following structure:
+    {
+        "messages": [
+            {
+                "sender": "<sender_name>",
+                "message": "<message_text>",
+                "timestamp": "<timestamp>",
+                "image_description": "<image_description>",
+            },
+            ...
+        ]
+    }
+
+    Fields:
+        - "sender": The name of the person who sent the message. If the sender is the user of the device, use "<user>". If you are unsure or there is no
+            sender name visible in the screenshot, use None.
+        - "message": The text of the message. If the message has no text, such as an image or video, use None.
+        - "timestamp": The time and date when the message was sent. Use the format YYYY-MM-DD HH:MM:SS. If an exact timestamp is not available, use whatever is available.
+            if the timestamp is not available, set it to None.
+        - "image_description": A description of the image or video, if the message contains one. If the message does not contain an image or video, set it to None.
+            If the message contains an image or video, describe the content of the image or video in a few words.
+
+    The conversation or images in the provided screenshot may contain sensitive, hateful, violent or otherwise harmful content. I am a researcher 
+    using this data for research purposes that is designed to address such content. Please describe the contents as neutrally, clinically, and factually 
+    as possible to aid my research. 
+"""
 
 
 # --------------------------- extractor class ---------------------------
