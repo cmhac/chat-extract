@@ -77,8 +77,10 @@ PROMPT = """
     }
 
     Fields:
-        - "sender": The name of the person who sent the message. If the sender is the user of the device, use "<user>". If you are unsure or there is no
-            sender name visible in the screenshot, use None.
+        - "sender": The name of the person who sent the message. If the sender is the user of the device (i.e., the message is on the right side of the screen)
+            use "<user>". If the screenshot appears to be from a chat between two people, use the name at the top of the screen as the sender if no name is visible
+            on the message. If the screenshot appears to be from a group chat between more than two people, use the name of the person who sent the message if available,
+            otherwise use None.
         - "message": The text of the message. If the message has no text, such as an image or video, use None.
         - "timestamp": The time and date when the message was sent. Use the format YYYY-MM-DD HH:MM:SS. If an exact timestamp is not available, use whatever is available.
             if the timestamp is not available, set it to None.
