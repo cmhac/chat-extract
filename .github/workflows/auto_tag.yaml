@@ -10,7 +10,7 @@ name: auto-tag
 
 on:
   workflow_run:
-    workflows: ["test"]
+    workflows: ["tests"]
     branches: [main]
     types:
       - completed
