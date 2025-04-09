@@ -106,7 +106,7 @@ class ChatTextExtractor:
                 f"Dotenv loaded: {dotenv_loaded}"
             )
         self.client = instructor.patch(AsyncOpenAI())
-        self.gpt_model = "gpt-4o-mini"
+        self.gpt_model = "gpt-4o"
 
         # configure storage directory for all files
         self.storage_dir = Path(".chat_extract")
@@ -194,7 +194,7 @@ class ChatTextExtractor:
         image_url = f"data:image/png;base64,{encode_image(image_path)}"
 
         return await self.client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             response_model=MessageList,
             max_tokens=2048,
             temperature=0,
