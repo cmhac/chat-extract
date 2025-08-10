@@ -32,10 +32,52 @@ Into a CSV file like this:
 | Connor Smith | "I’ve been meaning to try that place!"                                                 |           |
 |              | "How about that new place, The Green Stove?"                                           |           |
 
-## Installation
 
-```bash
-pipx install chat-extract
+## Installation (Windows example)
+
+Since this project is not published on PyPI, you must install it from the local source folder.
+
+1. **Install via pipx from your local clone:**
+```powershell ( or py .env)
+pipx install "C:\path\to\chat-extract"
+pipx ensurepath
+```
+**Important:** Close and reopen your terminal after running `pipx ensurepath`, or log out and back in, so the updated PATH is loaded.
+
+If `chat-extract` is still not found, you can call it directly:
+```powershell
+& "$env:USERPROFILE\.local\bin\chat-extract.exe" --help
+```
+
+2. **Set your OpenAI API key** (required for the tool to run):
+
+Temporary for current session:
+```powershell
+$env:OPENAI_API_KEY = "your_api_key_here"
+```
+
+Permanent for future sessions:
+```powershell
+setx OPENAI_API_KEY "your_api_key_here"
+```
+
+You can also put it in a `.env` file in the folder you run the tool from:
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+---
+
+## Usage
+
+**Basic syntax:**
+```powershell
+chat-extract VIDEO_PATH --output-path OUTPUT.csv [--n FRAMESKIP]
+```
+
+Example with the included demo GIF:
+```powershell
+chat-extract "docs\screen-recording-example.gif" --output-path "output.csv"
 ```
 
 ## Usage
