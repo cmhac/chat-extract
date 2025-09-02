@@ -35,17 +35,19 @@ Into a CSV file like this:
 
 ## Installation
 
-### Option 1: Install from PyPI (Recommended)
+Since this project is not published on PyPI, you must install it from GitHub.
 
-Once published, you can install chat-extract directly from PyPI:
+### Install via pipx from GitHub:
 
 ```bash
-pipx install chat-extract
+pipx install git+https://github.com/cmhac/chat-extract.git
 ```
 
-### Option 2: Install from Source (Development)
+**Note:** After installation, make sure the pipx binary directory is in your PATH. Run `pipx ensurepath` if needed and restart your terminal.
 
-If you want to install from the local source folder:
+### Alternative: Install from local source
+
+If you want to install from a local clone:
 
 ```bash
 # Clone the repository first
@@ -55,8 +57,6 @@ cd chat-extract
 # Install via pipx from local source
 pipx install .
 ```
-
-**Note:** After installation, make sure the pipx binary directory is in your PATH. Run `pipx ensurepath` if needed and restart your terminal.
 
 ### Setting up OpenAI API Key
 
@@ -92,8 +92,7 @@ Example with the included demo GIF:
 chat-extract "docs/screen-recording-example.gif" --output-path "output.csv"
 ```
 
-## Usage
-
+For help with all available options:
 ```bash
 chat-extract --help
 ```
