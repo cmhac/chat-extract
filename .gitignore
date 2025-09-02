@@ -14,3 +14,4 @@ htmlcov
 coverage.xml
 report.xml
 .DS_STORE
+/.vs
