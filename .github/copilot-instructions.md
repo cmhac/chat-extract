@@ -105,39 +105,9 @@ After making changes, ALWAYS run through these validation scenarios:
    - With API key: Should show progress bar and process frames (will fail with network error in restricted environments)
 
 ### Expected Test Results
-- **Tests**: 10 tests should pass in ~3 seconds
-- **Coverage**: Should achieve 95%+ code coverage (currently 95% with 6 missed lines in models.py)
-- **Linting**: pylint should score 10.00/10 
-- **Formatting**: black should report no changes needed
-
-### Project Dependencies
-The project uses these key dependencies:
-- **opencv-python**: Video/image processing  
-- **click**: CLI interface
-- **openai**: OpenAI API client
-- **instructor**: Structured LLM outputs
-- **polars**: Data processing and CSV output
-- **pydantic**: Data validation models
-- **tqdm**: Progress bars
-- **tenacity**: Retry logic for API calls
+All tests should pass without errors and achieve the required code coverage thresholds.
 
 ## Common Tasks
-
-### Project Structure
-```
-chat-extract/
-├── .github/           # GitHub workflows and actions
-├── chat_extract/      # Main application code
-│   ├── cli.py        # Command-line interface
-│   ├── extract.py    # Core extraction logic
-│   ├── image_utils.py # Image processing utilities
-│   └── models.py     # Pydantic data models
-├── tests/            # Test suite
-├── docs/             # Documentation and demo files
-├── justfile          # Task runner configuration
-├── pyproject.toml    # Poetry configuration and dependencies
-└── poetry.lock       # Locked dependency versions
-```
 
 ### Frequently Used Commands
 ```bash
@@ -161,17 +131,6 @@ poetry run python -c "import chat_extract; print(chat_extract.__file__)"
 - **NEVER CANCEL**: Poetry install takes 20 seconds - set 60+ second timeout
 - **NEVER CANCEL**: pylint takes 8 seconds - set 60+ second timeout  
 - **NEVER CANCEL**: Tests take 3 seconds - set 30+ second timeout
-
-### Known Issues and Workarounds
-- **Badge generation fails**: `just genbadges` fails due to network restrictions accessing img.shields.io - this is expected
-- **API key required**: Application requires valid OPENAI_API_KEY to process videos
-- **Network restrictions**: Some package installations and badge generation may fail in restricted environments
-
-### Dependencies and Requirements
-- **Python**: Requires Python 3.12+
-- **Poetry**: For dependency management and virtual environment
-- **Just**: For task running (installed via poetry as rust-just)
-- **OpenAI API**: Requires valid API key for functionality
 
 ### CI/CD Integration
 The repository includes GitHub Actions that:
