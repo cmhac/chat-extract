@@ -33,32 +33,44 @@ Into a CSV file like this:
 |              | "How about that new place, The Green Stove?"                                           |           |
 
 
-## Installation (Windows example)
+## Installation
 
-Since this project is not published on PyPI, you must install it from the local source folder.
+### Option 1: Install from PyPI (Recommended)
 
-1. **Install via pipx from your local clone:**
-```powershell ( or py .env)
-pipx install "C:\path\to\chat-extract"
-pipx ensurepath
-```
-**Important:** Close and reopen your terminal after running `pipx ensurepath`, or log out and back in, so the updated PATH is loaded.
+Once published, you can install chat-extract directly from PyPI:
 
-If `chat-extract` is still not found, you can call it directly:
-```powershell
-& "$env:USERPROFILE\.local\bin\chat-extract.exe" --help
+```bash
+pipx install chat-extract
 ```
 
-2. **Set your OpenAI API key** (required for the tool to run):
+### Option 2: Install from Source (Development)
+
+If you want to install from the local source folder:
+
+```bash
+# Clone the repository first
+git clone https://github.com/cmhac/chat-extract.git
+cd chat-extract
+
+# Install via pipx from local source
+pipx install .
+```
+
+**Note:** After installation, make sure the pipx binary directory is in your PATH. Run `pipx ensurepath` if needed and restart your terminal.
+
+### Setting up OpenAI API Key
+
+**Set your OpenAI API key** (required for the tool to run):
 
 Temporary for current session:
-```powershell
-$env:OPENAI_API_KEY = "your_api_key_here"
+```bash
+export OPENAI_API_KEY="your_api_key_here"
 ```
 
-Permanent for future sessions:
-```powershell
-setx OPENAI_API_KEY "your_api_key_here"
+Permanent (add to your shell's config file like ~/.bashrc or ~/.zshrc):
+```bash
+echo 'export OPENAI_API_KEY="your_api_key_here"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 You can also put it in a `.env` file in the folder you run the tool from:
@@ -71,13 +83,13 @@ OPENAI_API_KEY=your_api_key_here
 ## Usage
 
 **Basic syntax:**
-```powershell
+```bash
 chat-extract VIDEO_PATH --output-path OUTPUT.csv [--n FRAMESKIP]
 ```
 
 Example with the included demo GIF:
-```powershell
-chat-extract "docs\screen-recording-example.gif" --output-path "output.csv"
+```bash
+chat-extract "docs/screen-recording-example.gif" --output-path "output.csv"
 ```
 
 ## Usage
